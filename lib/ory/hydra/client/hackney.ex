@@ -1,10 +1,13 @@
 defmodule ORY.Hydra.Client.Hackney do
-  alias ORY.Hydra.{ Client }
-
   @behaviour ORY.Hydra.Client
 
-  @spec request(ORY.Hydra.http_method_t(), String.t(), ORY.Hydra.http_headers_t(), String.t(), any)
-           :: { :ok, ORY.Hydra.Client.response_t() } | { :error, any }
+  @spec request(
+          ORY.Hydra.http_method_t(),
+          String.t(),
+          ORY.Hydra.http_headers_t(),
+          String.t(),
+          any
+        ) :: { :ok, ORY.Hydra.Client.response_t() } | { :error, any }
   def request(method, url, headers, body, opts) do
     opts = opts ++ [:with_body]
 
