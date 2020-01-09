@@ -8,7 +8,8 @@ defmodule ORY.Hydra.MixProject do
       elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      dialyzer: dialyzer()
+      dialyzer: dialyzer(),
+      package: package()
     ]
   end
 
@@ -36,5 +37,15 @@ defmodule ORY.Hydra.MixProject do
     [
       plt_core_path: "./_build/#{Mix.env()}"
     ]
+  end
+
+  defp package do
+    %{
+      description: "Elixir client for the ORY Hydra administrative API",
+      licenses: ["MIT"],
+      links: %{
+        GitHub: "https://github.com/malomohq/ory-hydra-elixir"
+      }
+    }
   end
 end
