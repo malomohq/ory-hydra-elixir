@@ -11,7 +11,7 @@ defmodule ORY.Hydra.Config do
           }
 
   defstruct headers: [],
-            http_client: nil,
+            http_client: ORY.Hydra.Client.Hackney,
             http_client_opts: [],
             json_codec: Jason,
             retry: false,
