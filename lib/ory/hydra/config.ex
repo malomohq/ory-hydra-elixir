@@ -1,7 +1,7 @@
 defmodule ORY.Hydra.Config do
   @type t ::
-          %{
-            headers: map,
+          %__MODULE__{
+            headers: ORY.Hydra.http_headers_t(),
             http_client: module,
             http_client_opts: any,
             json_codec: module,
@@ -10,7 +10,7 @@ defmodule ORY.Hydra.Config do
             url: String.t()
           }
 
-  defstruct headers: %{},
+  defstruct headers: [],
             http_client: nil,
             http_client_opts: [],
             json_codec: Jason,
