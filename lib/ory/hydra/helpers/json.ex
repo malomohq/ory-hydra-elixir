@@ -1,13 +1,13 @@
 defmodule ORY.Hydra.Helpers.JSON do
   @moduledoc false
 
-  @spec decode(String.t(), ORY.Hydra.Config.t()) :: map
+  @spec decode(String.t(), ORY.Hydra.Config.t()) :: map | String.t()
   def decode(string, config) do
     case config.json_codec.decode(string) do
       { :ok, result } ->
         result
       { :error, _reason } ->
-        %{}
+        string
     end
   end
 
