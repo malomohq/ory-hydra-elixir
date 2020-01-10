@@ -50,22 +50,15 @@ Possible configuration values are provided below:
 
 * `:headers` - additional HTTP headers sent with a request. ORY.Hydra will
   always supply a `Content-Type` of `application/json`. Defaults to `[]`.
-
 * `:http_client` - HTTP client to use when making requests. Defaults to
   `ORY.Hydra.Client.Hackney`.
-
 * `:http_client_opts` - any options you want passed to the configured HTTP
   client when a request is made. Defaults to `[]`.
-
 * `:json_codec` - JSON codec to use when encoding/decoding request and response
   bodies. Defaults to `Jason`.
-
 * `:retry` - whether to retry a request when a status code of 500 is recevied or
   a client error occurs (e.g. timeout). Defaults to `false`.
-
 * `:retry_opts` - options for configuring retry behavior. Defaults to `[]`.
-
   * `:max_attempts` - the number of attempts to make before failing a request.
     Defaults to `3`.
-
 * `:url` - URL to issue HTTP requests to. Typically contains a port number.
