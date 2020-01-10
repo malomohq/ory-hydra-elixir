@@ -1,4 +1,13 @@
 defmodule ORY.Hydra do
+  @moduledoc """
+  ORY Hydra is an open source OAuth 2.0 and OpenID Connect 1.0 provider. This
+  project provides an Elixir client for interacting with ORY Hydra's
+  administrative REST API.
+
+  For additional information about ORY Hydra please refer to their
+  [official documentation](https://www.ory.sh/docs/hydra/).
+  """
+
   alias ORY.Hydra.{ Config, Operation, Request, Response }
 
   @type http_headers_t :: [{ String.t(), String.t() }]
