@@ -17,4 +17,9 @@ defmodule ORY.Hydra.Config do
             retry: false,
             retry_opts: [],
             url: nil
+
+  @spec new(map) :: t
+  def new(overrides) do
+    struct(__MODULE__, overrides)
+  end
 end
