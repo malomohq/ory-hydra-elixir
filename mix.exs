@@ -51,7 +51,8 @@ defmodule ORY.Hydra.MixProject do
       description: "Elixir client for the ORY Hydra administrative API",
       licenses: ["MIT"],
       links: %{
-        GitHub: "https://github.com/malomohq/ory-hydra-elixir"
+        GitHub: "https://github.com/malomohq/ory-hydra-elixir",
+        "Made by Malomo - Post-purchase experiences that customers love": "https://gomalomo.com"
       }
     }
   end
