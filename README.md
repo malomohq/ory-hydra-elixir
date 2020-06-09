@@ -19,7 +19,7 @@ your list of dependencies in `mix.exs`:
 
 ```elixir
 defp deps do
-  { :ory_hydra, "~> 1.0" }
+  { :ory_hydra, "~> 1.1" }
 end
 ```
 
