@@ -10,7 +10,7 @@ defmodule ORY.Hydra.Response do
 
   defstruct [:body, :headers, :status_code]
 
-  @spec new(ORY.Hydra.HTTP.response_t(), ORY.Hydra.Config.t()) :: t
+  @spec new(ORY.Hydra.Client.response_t(), ORY.Hydra.Config.t()) :: t
   def new(response, config) do
     body =  Helpers.JSON.decode(Map.get(response, :body), config)
 
