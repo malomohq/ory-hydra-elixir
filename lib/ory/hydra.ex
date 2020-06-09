@@ -24,6 +24,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :put,
       params: params,
+      params_in_query: [:consent_challenge],
       path: "/oauth2/auth/requests/consent/accept"
     }
   end
@@ -36,6 +37,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :put,
       params: params,
+      params_in_query: [:login_challenge],
       path: "/oauth2/auth/requests/login/accept"
     }
   end
@@ -48,6 +50,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :put,
       params: params,
+      params_in_query: [:logout_challenge],
       path: "/oauth2/auth/requests/logout/accept"
     }
   end
@@ -151,6 +154,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :get,
       params: params,
+      params_in_query: [:consent_challenge],
       path: "/oauth2/auth/requests/consent"
     }
   end
@@ -267,6 +271,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :put,
       params: params,
+      params_in_query: [:consent_challenge],
       path: "/oauth2/auth/requests/consent/reject"
     }
   end
@@ -279,6 +284,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :put,
       params: params,
+      params_in_query: [:login_challenge],
       path: "/oauth2/auth/requests/login/reject"
     }
   end
@@ -291,6 +297,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :put,
       params: params,
+      params_in_query: [:logout_challenge],
       path: "/oauth2/auth/requests/logout/reject"
     }
   end
@@ -300,7 +307,7 @@ defmodule ORY.Hydra do
   """
   @spec request(Operation.t(), map) :: response_t
   def request(operation, config) do
-    Request.send(operation, Config.new(config), %{})
+    Request.send(operation, Config.new(config))
   end
 
   @doc """
@@ -311,6 +318,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :delete,
       params: params,
+      params_in_query: [:subject],
       path: "/oauth2/auth/sessions/consent"
     }
   end
@@ -323,6 +331,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :delete,
       params: params,
+      params_in_query: [:subject],
       path: "/oauth2/auth/sessions/login"
     }
   end

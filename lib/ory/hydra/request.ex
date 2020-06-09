@@ -1,67 +1,81 @@
 defmodule ORY.Hydra.Request do
-  alias ORY.Hydra.{ Config, Helpers, Operation, Response }
+  alias ORY.Hydra.{ Helpers, Response }
 
-  @spec send(Operation.t(), Config.t(), map) :: ORY.Hydra.response_t()
-  def send(operation, %{ retry: true } = config, private) do
-    private = Map.put_new(private, :attempts, 0)
+  @type t ::
+          %__MODULE__{
+            attempt: integer,
+            body: binary,
+            headers: ORY.Hydra.http_headers_t(),
+            method: ORY.Hydra.http_method_t(),
+            result: any,
+            url: String.t()
+          }
 
-    attempt = Map.get(private, :attempts) + 1
-    max_attempts = Keyword.get(config.retry_opts, :max_attempts, 3)
+  defstruct attempt: 0,
+            body: nil,
+            headers: nil,
+            method: nil,
+            result: nil,
+            url: nil
 
-    private = %{ private | attempts: attempt }
+  @spec send(ORY.Hydra.Operation.t(), ORY.Hydra.Config.t()) :: ORY.Hydra.response_t()
+  def send(operation, config) do
+    body = Helpers.Body.encode!(operation, config)
 
-    result = do_send(operation, config, private)
+    headers = []
+    headers = headers ++ [{ "content-type", "application/json" }]
 
-    if retryable?(result) && max_attempts > attempt do
-      send(operation, config, private)
-    else
-      result
-    end
-  end
-
-  def send(operation, config, private) do
-    do_send(operation, config, private)
-  end
-
-  defp do_send(operation, config, private) do
-    http_client_opts = config.http_client_opts
-
-    body = Helpers.JSON.encode(operation.params, config)
-    headers = [{ "content-type", "application/json" }] ++ config.headers
     method = operation.method
+
     url = Helpers.URL.to_string(operation, config)
 
-    result =
-      config.http_client.request(
-        method,
-        url,
-        headers,
-        body,
-        http_client_opts
-      )
+    request = %__MODULE__{}
+    request = Map.put(request, :body, body)
+    request = Map.put(request, :headers, headers)
+    request = Map.put(request, :method, method)
+    request = Map.put(request, :url, url)
 
-    case result do
-      { :ok, %{ status_code: status_code } = response}
-        when status_code >= 400 ->
-        { :error, Response.new(response, private, config) }
-      { :ok, %{ status_code: status_code } = response}
-        when status_code >= 200 ->
-        { :ok, Response.new(response, private, config) }
-      otherwise ->
-        otherwise
+    dispatch(request, config)
+  end
+
+  defp dispatch(request, config) do
+    http_client = config.http_client
+
+    result = http_client.request(request.method, request.url, request.headers, request.body, config.http_client_opts)
+
+    request = Map.put(request, :attempt, request.attempt + 1)
+    request = Map.put(request, :result, result)
+
+    request
+    |> retry(config)
+    |> finish(config)
+  end
+
+  defp retry(request, config) do
+    max_attempts = Keyword.get(config.retry_opts, :max_attempts, 3)
+
+    if config.retry && max_attempts > request.attempt do
+      case request.result do
+        { :ok, %{ status_code: status_code } } when status_code >= 500 ->
+          dispatch(request, config)
+        { :error, _reason } ->
+          dispatch(request, config)
+        _otherwise ->
+          request
+      end
+    else
+      request
     end
   end
 
-  defp retryable?(result) do
-    case result do
-      { :ok, _response } ->
-        false
-      { :error, %Response{ status_code: status_code } } when status_code >= 500 ->
-        true
-      { :error, %Response{} } ->
-        false
-      _otherwise ->
-        true
+  defp finish(request, config) do
+    case request.result do
+      { :ok, %{ status_code: status_code } = response } when status_code >= 400 ->
+        { :error, Response.new(response, config) }
+      { :ok, %{ status_code: status_code } = response } when status_code >= 200 ->
+        { :ok, Response.new(response, config) }
+      otherwise ->
+        otherwise
     end
   end
 end

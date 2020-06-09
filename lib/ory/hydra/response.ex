@@ -1,26 +1,26 @@
 defmodule ORY.Hydra.Response do
-  alias ORY.Hydra.{ Client, Config, Helpers }
+  alias ORY.Hydra.{ Helpers }
 
   @type t ::
           %__MODULE__{
-            body: map | String.t(),
+            body: map,
             headers: ORY.Hydra.http_headers_t(),
-            private: map,
             status_code: pos_integer
           }
 
-  defstruct body: nil,
-            headers: nil,
-            private: %{},
-            status_code: nil
+  defstruct [:body, :headers, :status_code]
 
-  @spec new(Client.response_t(), Config.t(), map) :: t
-  def new(response, private, config) do
-    %__MODULE__{
-      body: Helpers.JSON.decode(response.body, config),
-      headers: response.headers,
-      private: private,
-      status_code: response.status_code
-    }
+  @spec new(ORY.Hydra.HTTP.response_t(), ORY.Hydra.Config.t()) :: t
+  def new(response, config) do
+    body =  Helpers.JSON.decode(Map.get(response, :body), config)
+
+    headers = Map.get(response, :headers)
+
+    status_code = Map.get(response, :status_code)
+
+    %__MODULE__{}
+    |> Map.put(:body, body)
+    |> Map.put(:headers, headers)
+    |> Map.put(:status_code, status_code)
   end
 end
