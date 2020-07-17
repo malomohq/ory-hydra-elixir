@@ -23,6 +23,7 @@ defmodule ORY.Hydra.Request do
     body = Helpers.Body.encode!(operation, config)
 
     headers = []
+    headers = headers ++ [{ "accept", "application/json" }]
     headers = headers ++ [{ "content-type", Helpers.Headers.content_type(operation) }]
 
     method = operation.method
