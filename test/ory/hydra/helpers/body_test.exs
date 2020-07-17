@@ -12,7 +12,7 @@ defmodule ORY.Hydra.Helpers.BodyTest do
   end
 
   test "encode!/2 when :content_type is :form_urlencoded" do
-    assert "ok%3Dtrue" == Helpers.Body.encode!(%Operation{ content_type: :form_urlencoded, method: :post, params: %{ ok: true } }, Config.new(%{}))
+    assert "ok=true" == Helpers.Body.encode!(%Operation{ content_type: :form_urlencoded, method: :post, params: %{ ok: true } }, Config.new(%{}))
   end
 
   test "encode!/2 when :content_type is :json" do
