@@ -233,6 +233,7 @@ defmodule ORY.Hydra do
   @spec introspect(map) :: Operation.t()
   def introspect(params) do
     %Operation{
+      content_type: :form_urlencoded,
       method: :post,
       params: params,
       path: "/oauth2/introspect"
