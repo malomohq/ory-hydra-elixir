@@ -25,6 +25,7 @@ defmodule ORY.Hydra.Request do
     headers = []
     headers = headers ++ [{ "accept", "application/json" }]
     headers = headers ++ [{ "content-type", Helpers.Headers.content_type(operation) }]
+    headers = headers ++ Map.get(config, :headers, [])
 
     method = operation.method
 
