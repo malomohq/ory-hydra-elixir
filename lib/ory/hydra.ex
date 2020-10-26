@@ -319,7 +319,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :delete,
       params: params,
-      params_in_query: [:subject],
+      params_in_query: [:all, :client, :subject],
       path: "/oauth2/auth/sessions/consent"
     }
   end
