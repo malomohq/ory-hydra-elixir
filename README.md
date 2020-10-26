@@ -29,8 +29,8 @@ to specify `hackney` and `jason` as dependencies as well.
 
 ## Usage
 
-ORY.Hydra implements all administrative REST API endpoints as of oryOS.14. For
-details on functions supporting individual endpoints please refer to our
+ORY.Hydra implements all administrative REST API endpoints. For details on
+functions supporting individual endpoints please refer to our
 [documentation](https://hexdocs.pm/ory_hydra/).
 
 ### Example
