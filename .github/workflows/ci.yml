@@ -7,16 +7,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
 
         with:
           key: ${{ github.job }}-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
 
           path: _build
 
-      - uses: erlef/setup-elixir@v1
+      - uses: erlef/setup-beam@v1
 
         with:
           elixir-version: ${{ matrix.elixir }}
@@ -29,24 +29,38 @@ jobs:
 
     strategy:
       matrix:
-        elixir: [1.9.x, 1.10.x, 1.11.x]
+        elixir:
+          - 1.12.x
+          - 1.13.x
+          - 1.14.x
 
-        otp: [22.x, 23.x]
+        exclude:
+          - elixir: 1.12.x
+
+            otp: 25.x
+
+          - elixir: 1.13.x
+
+            otp: 25.x
+
+        otp:
+          - 24.x
+          - 25.x
 
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: actions/cache@v2
+      - uses: actions/cache@v3
 
         with:
           key: ${{ github.job }}-${{ matrix.elixir }}-${{ matrix.otp }}-${{ hashFiles('mix.lock') }}-1
 
           path: _build
 
-      - uses: erlef/setup-elixir@v1
+      - uses: erlef/setup-beam@v1
 
         with:
           elixir-version: ${{ matrix.elixir }}
@@ -59,6 +73,20 @@ jobs:
 
     strategy:
       matrix:
-        elixir: [1.9.x, 1.10.x, 1.11.x]
+        elixir:
+          - 1.12.x
+          - 1.13.x
+          - 1.14.x
 
-        otp: [22.x, 23.x]
+        exclude:
+          - elixir: 1.12.x
+
+            otp: 25.x
+
+          - elixir: 1.13.x
+
+            otp: 25.x
+
+        otp:
+          - 24.x
+          - 25.x
