@@ -22,6 +22,7 @@ defmodule ORY.Hydra.MixProject do
   defp deps do
     [
       { :hackney, "~> 1.15", optional: true },
+      { :req, "~> 0.3", optional: true },
 
       { :jason, "~> 1.1", optional: true },
 
