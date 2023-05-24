@@ -21,30 +21,28 @@ defmodule ORY.Hydra.MixProject do
 
   defp deps do
     [
-      { :hackney, "~> 1.15", optional: true },
-      { :req, "~> 0.3", optional: true },
-
-      { :jason, "~> 1.1", optional: true },
+      {:hackney, "~> 1.15", optional: true},
+      {:jason, "~> 1.1", optional: true},
+      {:req, "~> 0.3", optional: true},
 
       #
       # dev
       #
 
-      { :dialyxir, "~> 1.3.0", only: :dev, runtime: false },
-
-      { :ex_doc, ">= 0.0.0", only: :dev, runtime: false },
+      {:dialyxir, "~> 1.3.0", only: :dev, runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
 
       #
       # test
       #
 
-      { :bypass, "~> 2.1", only: :test }
+      {:bypass, "~> 2.1", only: :test}
     ]
   end
 
   defp dialyzer do
     [
-      plt_add_apps: [:hackney],
+      plt_add_apps: [:hackney, :req],
       plt_core_path: "./_build/#{Mix.env()}"
     ]
   end
