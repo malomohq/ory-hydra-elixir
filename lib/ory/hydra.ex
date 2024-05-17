@@ -25,7 +25,7 @@ defmodule ORY.Hydra do
       method: :put,
       params: params,
       params_in_query: [:consent_challenge],
-      path: "/oauth2/auth/requests/consent/accept"
+      path: "/admin/oauth2/auth/requests/consent/accept"
     }
   end
 
@@ -38,7 +38,7 @@ defmodule ORY.Hydra do
       method: :put,
       params: params,
       params_in_query: [:login_challenge],
-      path: "/oauth2/auth/requests/login/accept"
+      path: "/admin/oauth2/auth/requests/login/accept"
     }
   end
 
@@ -51,7 +51,7 @@ defmodule ORY.Hydra do
       method: :put,
       params: params,
       params_in_query: [:logout_challenge],
-      path: "/oauth2/auth/requests/logout/accept"
+      path: "/admin/oauth2/auth/requests/logout/accept"
     }
   end
 
@@ -74,7 +74,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :post,
       params: params,
-      path: "/clients"
+      path: "/admin/clients"
     }
   end
 
@@ -85,7 +85,7 @@ defmodule ORY.Hydra do
   def delete_client(id) do
     %Operation{
       method: :delete,
-      path: "/clients/#{id}"
+      path: "/admin/clients/#{id}"
     }
   end
 
@@ -96,7 +96,7 @@ defmodule ORY.Hydra do
   def delete_jwk(set, kid) do
     %Operation{
       method: :delete,
-      path: "/keys/#{set}/#{kid}"
+      path: "/admin/keys/#{set}/#{kid}"
     }
   end
 
@@ -107,7 +107,7 @@ defmodule ORY.Hydra do
   def delete_jwk_set(set) do
     %Operation{
       method: :delete,
-      path: "/keys/#{set}"
+      path: "/admin/keys/#{set}"
     }
   end
 
@@ -131,7 +131,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :post,
       params: params,
-      path: "/keys/#{set}"
+      path: "/admin/keys/#{set}"
     }
   end
 
@@ -142,7 +142,7 @@ defmodule ORY.Hydra do
   def get_client(id) do
     %Operation{
       method: :get,
-      path: "/clients/#{id}"
+      path: "/admin/clients/#{id}"
     }
   end
 
@@ -155,7 +155,7 @@ defmodule ORY.Hydra do
       method: :get,
       params: params,
       params_in_query: [:consent_challenge],
-      path: "/oauth2/auth/requests/consent"
+      path: "/admin/oauth2/auth/requests/consent"
     }
   end
 
@@ -166,7 +166,7 @@ defmodule ORY.Hydra do
   def get_jwk(set, kid) do
     %Operation{
       method: :get,
-      path: "/keys/#{set}/#{kid}"
+      path: "/admin/keys/#{set}/#{kid}"
     }
   end
 
@@ -177,7 +177,7 @@ defmodule ORY.Hydra do
   def get_jwk_set(set) do
     %Operation{
       method: :get,
-      path: "/keys/#{set}"
+      path: "/admin/keys/#{set}"
     }
   end
 
@@ -189,7 +189,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :get,
       params: params,
-      path: "/oauth2/auth/requests/login"
+      path: "/admin/oauth2/auth/requests/login"
     }
   end
 
@@ -201,7 +201,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :get,
       params: params,
-      path: "/oauth2/auth/requests/logout"
+      path: "/admin/oauth2/auth/requests/logout"
     }
   end
 
@@ -236,7 +236,7 @@ defmodule ORY.Hydra do
       content_type: :form_urlencoded,
       method: :post,
       params: params,
-      path: "/oauth2/introspect"
+      path: "/admin/oauth2/introspect"
     }
   end
 
@@ -248,7 +248,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :get,
       params: params,
-      path: "/clients"
+      path: "/admin/clients"
     }
   end
 
@@ -260,7 +260,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :get,
       params: params,
-      path: "/oauth2/auth/sessions/consent"
+      path: "/admin/oauth2/auth/sessions/consent"
     }
   end
 
@@ -273,7 +273,7 @@ defmodule ORY.Hydra do
       method: :put,
       params: params,
       params_in_query: [:consent_challenge],
-      path: "/oauth2/auth/requests/consent/reject"
+      path: "/admin/oauth2/auth/requests/consent/reject"
     }
   end
 
@@ -286,7 +286,7 @@ defmodule ORY.Hydra do
       method: :put,
       params: params,
       params_in_query: [:login_challenge],
-      path: "/oauth2/auth/requests/login/reject"
+      path: "/admin/oauth2/auth/requests/login/reject"
     }
   end
 
@@ -299,7 +299,7 @@ defmodule ORY.Hydra do
       method: :put,
       params: params,
       params_in_query: [:logout_challenge],
-      path: "/oauth2/auth/requests/logout/reject"
+      path: "/admin/oauth2/auth/requests/logout/reject"
     }
   end
 
@@ -320,7 +320,7 @@ defmodule ORY.Hydra do
       method: :delete,
       params: params,
       params_in_query: [:all, :client, :subject],
-      path: "/oauth2/auth/sessions/consent"
+      path: "/admin/oauth2/auth/sessions/consent"
     }
   end
 
@@ -333,7 +333,7 @@ defmodule ORY.Hydra do
       method: :delete,
       params: params,
       params_in_query: [:subject],
-      path: "/oauth2/auth/sessions/login"
+      path: "/admin/oauth2/auth/sessions/login"
     }
   end
 
@@ -345,7 +345,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :put,
       params: params,
-      path: "/clients/#{id}"
+      path: "/admin/clients/#{id}"
     }
   end
 
@@ -357,7 +357,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :put,
       params: params,
-      path: "/keys/#{set}/#{kid}"
+      path: "/admin/keys/#{set}/#{kid}"
     }
   end
 
@@ -369,7 +369,7 @@ defmodule ORY.Hydra do
     %Operation{
       method: :put,
       params: params,
-      path: "/keys/#{set}"
+      path: "/admin/keys/#{set}"
     }
   end
 end
